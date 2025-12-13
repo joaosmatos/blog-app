@@ -10,7 +10,11 @@ router.get('/posts', (req, res) => {
 })
 
 router.get("/categorias", (req, res) => {
-    res.send("pagina de categorias")
+    res.render("adimin/categorias")
+})
+
+router.get('/categorias/add', (req, res) => {
+    res.render("adimin/addcategorias")
 })
 
 
