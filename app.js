@@ -5,8 +5,24 @@
     const app = express()
     const admin = require("./rotas/admin")
     const path = require("path")
+    const mongoose = require("mongoose")
+    const session = require("express-session")
+    const flash = require("connect-flash")
     //const mongoose = require("mongoose")
 // configurações
+    // sessâo
+        app.use(session({
+            secret: "cursodenode",
+            resave: true,
+            saveuninitialized: true
+        }))
+        app.use(flash())
+    // middleware
+        app.use((req, res, next) => {
+            res.locals.success_msg = req.flash("sucess_msg")
+            res.locals.error_msg = req.flash("error_msg")
+            next()
+        })    
     //bdy parser
     app.use(bodyParser.urlencoded({extended: true}))
     app.use(bodyParser.json())
