@@ -8,7 +8,8 @@
             <h4> {{titulo}} </h4>
             <p>descrição: {{descricao}} </p>
             <small>data: {{data}} </small>
-            <small>categoria: {{categoria.nome}} </small>
+            <small>categoria: {{categoria.nome}} </small><br>
+            <a href="/adimin/postagens/edit/{{_id}}"><button class="btn btn-success mt-3">Editar postagem</button></a>
         </div>
     </div>
 {{else}}
