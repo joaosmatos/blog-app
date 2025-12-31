@@ -83,7 +83,22 @@
     })
 
     app.get("/categorias/:slug", (req, res) => {
-        Categoria.findOne().then(())
+        Categoria.findOne({slug: req.params.slug}).then((categorias) => {
+            if(categoria){
+                Postagem.find({categoria: categoria._id}).then((postagens) => {
+                    res.render("categorias/postagens", {postagens: postagens, categoria: categoria})
+                }).catch((err) => {
+                    req.flash("error_msg", "Houve um erro ao listar os posts!")
+                    res.redirect("/")
+                })
+            }else{
+                req.flash("error_msg", "esta categoria não existe")
+                res.redirect("/")
+            }
+        }).catch((err) => {
+            req.flash("error_msg", "Houve um erro interno ao carregar a pagina desta categoria")
+            res.redirect("/")
+        })
     })
 
     app.get("/404", (req, res) => {
