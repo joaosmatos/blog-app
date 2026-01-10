@@ -3,6 +3,7 @@ const router = express.Router()
 const mongoose = require("mongoose")
 const bcrypt = require("bcryptjs")
 const passport = require("passport")
+const eAdmin = require("../helpers/eAdmin")
 
 require("../models/Usuario")
 const Usuario = mongoose.model("usuarios")
@@ -54,7 +55,7 @@ router.post("/cadastro", (req, res) =>{
                 const novoUsuario = new Usuario({
                     nome: req.body.nome,
                     email: req.body.email,
-                    senha: req.body.senha
+                    senha: req.body.senha,
                 })
 
                 //Gerar HASH de senha
